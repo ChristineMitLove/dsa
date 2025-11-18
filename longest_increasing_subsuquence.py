@@ -11,3 +11,19 @@ def longest_increasing_subsequence_length(A):
                 dp[i] = max(dp[i], dp[j] + 1)
     
     return max(dp)
+
+
+# More advanved version : O(nlogn) using Patience Sorting
+# using binary search
+
+from bisect import bisect_left
+
+def lis_fast(A):
+    tails = []
+    for num in A:
+        pos = bisect_left(tails, num)
+        if pos == len(tails):
+            tails.append(num)
+        else:
+            tails[pos] = num
+    return len(tails)
